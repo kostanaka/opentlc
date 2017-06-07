@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 #
 if [ -n $PASS ]; then
-    echo PASSWORD /dev/tty
+    echo PASSWORD > /dev/tty
     echo $PASS
     exit 0
 fi
