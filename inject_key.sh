@@ -1,7 +1,9 @@
 #!/usr/bin/bash
 #
 if [ -n $PASS ]; then
+    echo PASSWORD /dev/tty
     echo $PASS
+    exit 0
 fi
 
 export PASS='r3dh4t1!'
