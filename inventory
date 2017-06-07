@@ -1,0 +1,8 @@
+[workstation]
+workstation.example.com
+
+[cloudforms]
+cf.example.com
+
+[tower]
+ansible1.example.com
