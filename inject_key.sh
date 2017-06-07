@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 #
-if [ -n $PASS ]; then
+if [ x"$PASS" == x ]; then
     echo PASSWORD > /dev/tty
     echo $PASS
     exit 0
