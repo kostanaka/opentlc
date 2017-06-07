@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 #
 if [ -n $PASS ]; then
-    echo PASS
+    echo $PASS
 fi
 
 export PASS='r3dh4t1!'
