@@ -1,0 +1,19 @@
+---
+- name: workstationの準備
+  hosts: all
+  gather_facts: False
+  become: yes
+  become_user: root
+
+  tasks:
+
+  - name: gitのインストール
+    yum:
+      name: git
+      state: latest
+
+  - name: playbookをダウンロード(from github)
+    git:
+      repo: 'https://github.com/kostanaka/opentlc.git'
+      dest: /root/opentlc
+
