@@ -12,8 +12,16 @@
       name: git
       state: latest
 
+  - name: expectのインストール
+    yum:
+      name: expect
+      state: latest
+
   - name: playbookをダウンロード(from github)
     git:
       repo: 'https://github.com/kostanaka/opentlc.git'
       dest: /root/opentlc
+      force: yes
 
+  - name: Towerへのsshキー設定
+    command: /root/opentlc/inject_key.sh
