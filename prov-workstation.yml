@@ -7,14 +7,14 @@
 
   tasks:
 
-  - name: gitのインストール
+  - name: EPELの設定 (for ansible)
     yum:
-      name: git
-      state: latest
+      name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+      state: present
 
-  - name: expectのインストール
+  - name: 必要パッケージのインストール(git, expect, ansible)
     yum:
-      name: expect
+      name: git, expect, ansible
       state: latest
 
   - name: playbookをダウンロード(from github)
@@ -25,3 +25,4 @@
 
   - name: Towerへのsshキー設定
     command: /root/opentlc/inject_key.sh
+
