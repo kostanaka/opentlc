@@ -11,7 +11,7 @@
     shell: /var/www/miq/vmdb/bin/rake db:migrate
     args:
       chdir: /var/www/miq/vmdb
-   register: migration1
+    register: migration1
 
   - debug:
       msg: "{{ migration1 }}"
