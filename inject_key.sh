@@ -8,7 +8,15 @@ PASS="r3dh4t1!"
 
 expect -f - << EXPECT
 spawn ssh-copy-id root@ansible1.example.com
-expect "password: "
-send "$PASS\r"
-expect "added: 1"
+expect "password: " {
+	send "$PASS\r"
+} "already exist" {
+	exit 0
+}
+
+expect timeout {
+       exit 1
+} "added: 1" {
+       exit 0
+}
 EXPECT
