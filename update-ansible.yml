@@ -37,22 +37,17 @@
       state: stopped
       enabled: no
 
-  - name: admin_password設定(=>{{ tower_passwords }})
+  - name: password設定(=>inventoryファイルを見て下さい)
     lineinfile:
       path: /root/ansible-tower-setup/inventory
-      regexp: '^admin_password='
+      regexp: "{{ items.regexp }}"
+      line: "{{ items.line }}"
+    with_items:
+    - regexp: '^admin_password='
       line: admin_password='{{ tower_passwords }}'
-
-  - name: pg_password設定(=>{{ tower_passwords }})
-    lineinfile:
-      path: /root/ansible-tower-setup/inventory
-      regexp: '^pg_password='
+    - regexp: '^pg_password='
       line: pg_password='{{ tower_passwords }}'
-
-  - name: rabbitmq_password設定(=>{{ tower_passwords }})
-    lineinfile:
-      path: /root/ansible-tower-setup/inventory
-      regexp: '^rabbitmq_password='
+    - regexp: '^rabbitmq_password='
       line: rabbitmq_password='{{ tower_passwords }}'
 
   - name: setupスクリプト実行
