@@ -19,6 +19,7 @@ Host workstation-*.rhpds.opentlc.com
 
 4. 適当な場所へplaybookをダウンロードして、実行
 ```
+export GUID="XXXX"
 cd /tmp
 wget https://raw.githubusercontent.com/kostanaka/opentlc/master/prov-workstation.yml
 ansible-playbook -i workstation-${GUID}.rhpds.opentlc.com, prov-workstation.yml
@@ -31,12 +32,15 @@ ansible-playbook -i workstation-${GUID}.rhpds.opentlc.com, prov-workstation.yml
 5. EPELを有効にします
 6. 必要なパッケージを入れます
 7. playbook他をダウンロードします
+8. Ansible Towerへパスワードなしでログインできるようにします
 ```
+export GUID="XXXX"
 ssh -i /your/identity/file yourname-redhat.com@workstation-${GUID}.rhpds.opentlc.com
 sudo -i
 rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 yum install -y git expect ansible
 git clone https://github.com/kostanaka/opentlc.git
+ssh-copy-id ansible1.example.com
 ```
 
 ## Ansible Towerのバージョンアップ
@@ -71,8 +75,9 @@ ansible-playbook -i inventory update-cf-2.yml
 
 以上
 
-## 忘備録(その他やるべき事)
+## 忘備録(その他やるべき事など)
 
-以下は手作業ですが、やっとかないとハマるので書いておきます::
+* Ansible Towerのバージョンアップと、CloudFormsのバージョンアップは、同時並行でやっても大丈夫(なハズ)です。
+* このLabの設定だと、CloudFormsはReportを実行しない(=レポートだけじゃなくてダッシュボードのウィジェットも作製されない)ようになっています。Server Roleの中の Reporting を有効にしましょう(他にもいろいろあると思います)。[General Configuration](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html/general_configuration/)の、[4.1.4.1.3. Server Roles](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html/general_configuration/configuration#servers)を参考に。
 
-1. CloudFormsで、ロールを追加しておく
+
