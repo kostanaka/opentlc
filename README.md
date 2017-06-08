@@ -31,12 +31,14 @@ ansible-playbook -i workstation-${GUID}.rhpds.opentlc.com, prov-workstation.yml
 5. EPELを有効にします
 6. 必要なパッケージを入れます
 7. playbook他をダウンロードします
+8. Ansible Towerへパスワードなしでログインできるようにします
 ```
 ssh -i /your/identity/file yourname-redhat.com@workstation-${GUID}.rhpds.opentlc.com
 sudo -i
 rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 yum install -y git expect ansible
 git clone https://github.com/kostanaka/opentlc.git
+ssh-copy-id ansible1.example.com
 ```
 
 ## Ansible Towerのバージョンアップ
