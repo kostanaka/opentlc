@@ -47,8 +47,8 @@
   - name: postgresql.confの編集(2) パラメータを幾つか追加/変更
     lineinfile:
       path: /var/opt/rh/rh-postgresql95/lib/pgsql/data/postgresql.conf
-      regexp: {{ item.regexp }}
-      line: {{ item.line }}
+      regexp: "{{ item.regexp }}"
+      line: "{{ item.line }}"
     with_items:
     - regexp: '^.*max_wal_size =.*$'
       line: '#max_wal_size = 1GB'
