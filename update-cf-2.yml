@@ -8,7 +8,7 @@
   tasks:
 
   - name: vmdbのmigration(その1)
-    shell: /var/www/miq/vmdb/bin/rake db:migrate
+    shell: bash -l /var/www/miq/vmdb/bin/rake db:migrate
     args:
       chdir: /var/www/miq/vmdb
     register: migration1
@@ -17,7 +17,7 @@
       msg: "{{ migration1 }}"
 
   - name: vmdbのmigration(その2)
-    shell: /var/www/miq/vmdb/bin/rake evm:automate:reset
+    shell: bash -l /var/www/miq/vmdb/bin/rake evm:automate:reset
     args:
       chdir: /var/www/miq/vmdb
     register: migration2
