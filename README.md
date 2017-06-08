@@ -75,8 +75,9 @@ ansible-playbook -i inventory update-cf-2.yml
 
 以上
 
-## 忘備録(その他やるべき事)
+## 忘備録(その他やるべき事など)
 
-以下は手作業ですが、やっとかないとハマるので書いておきます::
+* Ansible Towerのバージョンアップと、CloudFormsのバージョンアップは、同時並行でやっても大丈夫(なハズ)です。
+* このLabの設定だと、CloudFormsはReportを実行しない(=レポートだけじゃなくてダッシュボードのウィジェットも作製されない)ようになっています。Server Roleの中の Reporting を有効にしましょう(他にもいろいろあると思います)。[General Configuration](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html/general_configuration/)の、[4.1.4.1.3. Server Roles](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html/general_configuration/configuration#servers)を参考に。
 
-1. CloudFormsで、ロールを追加しておく
+
