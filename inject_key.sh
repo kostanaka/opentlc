@@ -8,7 +8,7 @@ PASS="r3dh4t1!"
 
 expect -f - << EXPECT
 spawn ssh-copy-id root@ansible1.example.com
-proc_login {} {
+proc proc_login {} {
   expect timeout {
     exit 1
   } "continue connecting (yes/no)? " {
