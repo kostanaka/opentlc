@@ -19,6 +19,7 @@ Host workstation-*.rhpds.opentlc.com
 
 4. 適当な場所へplaybookをダウンロードして、実行
 ```
+export GUID="XXXX"
 cd /tmp
 wget https://raw.githubusercontent.com/kostanaka/opentlc/master/prov-workstation.yml
 ansible-playbook -i workstation-${GUID}.rhpds.opentlc.com, prov-workstation.yml
@@ -33,6 +34,7 @@ ansible-playbook -i workstation-${GUID}.rhpds.opentlc.com, prov-workstation.yml
 7. playbook他をダウンロードします
 8. Ansible Towerへパスワードなしでログインできるようにします
 ```
+export GUID="XXXX"
 ssh -i /your/identity/file yourname-redhat.com@workstation-${GUID}.rhpds.opentlc.com
 sudo -i
 rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
