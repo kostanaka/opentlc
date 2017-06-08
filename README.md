@@ -10,7 +10,7 @@ see. http://www.opentlc.com/ssh.html
 
 ### ローカルでAnsibleが使える人：
 
-3. workstation-${GUID}.rhpds.opentlc.com へidentityファイル指定せずにsshできるよう設定しておいて下さい。以下は ~/.ssh/configの例
+3. workstation-${GUID}.rhpds.opentlc.com へidentityファイルを指定せずにsshできるよう設定しておいて下さい。以下は ~/.ssh/configの例
 ```
 Host workstation-*.rhpds.opentlc.com
   IdentityFile ~/.ssh/id_rsa_nopass
