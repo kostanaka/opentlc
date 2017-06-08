@@ -19,7 +19,7 @@
       dest: /root/
 
   - name: 展開した場所へのsymlink作成
-    shell: ln -s /root/ansible-tower-setup*el7 /root/ansible-tower-setup
+    shell: ln -sf /root/ansible-tower-setup*el7 /root/ansible-tower-setup
 
   - name: ansible & ansible-tower パッケージを削除
     yum:
