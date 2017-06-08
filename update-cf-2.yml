@@ -48,13 +48,23 @@
     lineinfile:
       path: /var/opt/rh/rh-postgresql95/lib/pgsql/data/postgresql.conf
       regexp: {{ item.regexp }}
-      replace: {{ item.replace }}
+      line: {{ item.line }}
     with_items:
     - regexp: '^.*max_wal_size =.*$'
-      replace: '#max_wal_size = 1GB'
+      line: '#max_wal_size = 1GB'
     - regexp: '^.*min_wal_size =.*$'
-      replace: '#min_wal_size = 80MB'
+      line: '#min_wal_size = 80MB'
     - regexp: '^.*shared_preload_libraries =.*$'
-      replace: shared_preload_libraries = 'pglogical,repmgr_funcs'
+      line: shared_preload_libraries = 'pglogical,repmgr_funcs'
     - regexp: '^.*wal_log_hints =.*$'
-      replace: 'wal_log_hints = on'
+      line: 'wal_log_hints = on'
+
+  - name: postgresqlサービスをenable & start
+    service:
+      state: started
+      enabled: yes
+
+  - name: evmserverdを開始
+    service:
+      name: evmserverd
+      state: started

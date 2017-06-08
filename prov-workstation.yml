@@ -12,9 +12,9 @@
       name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
       state: present
 
-  - name: 必要パッケージのインストール(git, expect, ansible)
+  - name: 必要パッケージのインストール(git, expect, ansible, pexpect)
     yum:
-      name: git, expect, ansible
+      name: git, expect, ansible, pexpect
       state: latest
 
   - name: playbookをダウンロード(from github)
