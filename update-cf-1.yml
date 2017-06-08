@@ -1,0 +1,24 @@
+---
+- name: update CloudForms (4.1 to 4.2)
+  hosts: cloudforms
+  gather_facts: False
+  become: yes
+  become_user: root
+
+  tasks:
+
+  - name: リポジトリの変更(CF4.1=>CF4.2へ)
+    replace:
+      path: /etc/yum.repos.d/open.repo
+      regexp: cf-me-5.6-for-rhel-7-rpms
+      replace: cf-me-5.7-for-rhel-7-rpms
+
+  - name: サーバー停止
+    service:
+      name: evmserverd
+      state: stopped
+
+  - name: パッケージのアップデート(all)
+    yum:
+      name: '*'
+      state: latest
