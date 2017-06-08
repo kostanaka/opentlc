@@ -14,7 +14,7 @@
 
   - name: アーカイブ展開
     unarchive:
-      remove_src: yes
+      remote_src: yes
       src: /root/ansible-tower-setup-bundle-latest.el7.tar.gz
       dest: /root/
 
@@ -27,7 +27,11 @@
       state: removed
 
   - name: 旧ファイルの削除
-    command: /usr/bin/rm -rf /var/lib/awx
+    file:
+      path: /var/lib/awx
+      state: absent
+
+#    command: /usr/bin/rm -rf /var/lib/awx
 
   - name: httpdの停止&無効化
     service:
