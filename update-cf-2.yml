@@ -28,14 +28,33 @@
       msg: "{{ migration2_result }}"
 
   - name: postgresql upgradeスクリプト実行
-    command: /usr/bin/bash -lc "/usr/bin/miq_postgres_upgrade.sh < (sleep 5; echo Y)"
+    command: /usr/bin/bash -lc "echo Y | /usr/bin/miq_postgres_upgrade.sh"
     args:
       chdir: /root
     register: upgrade_result
           
-  - name: (実行結果)
-    debug:
-      msg: "{{ upgrade_result }}"
+#  - name: (実行結果)
+#    debug:
+#      msg: "{{ upgrade_result }}"
 
 
+  - name: postgresql.confの編集(1) checkpoint_segments=を削除
+    lineinfile:
+      path: /var/opt/rh/rh-postgresql95/lib/pgsql/data/postgresql.conf
+      regexp: '^.*checkpoint_segments.*$'
+      state: absent
 
+  - name: postgresql.confの編集(2) パラメータを幾つか追加/変更
+    lineinfile:
+      path: /var/opt/rh/rh-postgresql95/lib/pgsql/data/postgresql.conf
+      regexp: {{ item.regexp }}
+      replace: {{ item.replace }}
+    with_items:
+    - regexp: '^.*max_wal_size =.*$'
+      replace: '#max_wal_size = 1GB'
+    - regexp: '^.*min_wal_size =.*$'
+      replace: '#min_wal_size = 80MB'
+    - regexp: '^.*shared_preload_libraries =.*$'
+      replace: shared_preload_libraries = 'pglogical,repmgr_funcs'
+    - regexp: '^.*wal_log_hints =.*$'
+      replace: 'wal_log_hints = on'
