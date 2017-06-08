@@ -36,7 +36,7 @@ git clone https://github.com/kostanaka/opentlc.git
 ## Ansible Towerのバージョンアップ
 
 バージョンアップつーか、既存のものを消して新しいものをインストールします。
-[村井さんが作ったガイド](https://github.com/mamurai/docs/blob/master/01_Ascii_Doc/30_Ansible-Tower/AnsibleTower-vCenter_Demo.adoc)もあるので、参照して下さい：
+[村井さんが作ったガイド](https://github.com/mamurai/docs/blob/master/01_Ascii_Doc/30_Ansible-Tower/AnsibleTower-vCenter_Demo.adoc)もあるので、参考にして下さい：
 
 1. workstation-${GUID}.rhpds.opentlc.com へログインし、rootになります
 2. /root/opentlc ディレクトリへ移動します
@@ -61,6 +61,6 @@ adminユーザーのパスワードは"password"でインストールされま�
 ansible-playbook -i inventory update-cf-1.yml
 ansible-playbook -i inventory update-cf-2.yml
 ```
-パスワードは従来通りです (admin/r3dh4t1!)
+パスワードは従来通り変更ありません。
 
 以上
