@@ -1,0 +1,59 @@
+---
+- name: Ansible Towerのアップデート
+  hosts: tower
+  gather_facts: False
+  become: yes
+  become_user: root
+
+  tasks:
+
+  - name: Towerの最新アーカイブをダウンロード
+    get_url:
+      dest: /root/
+      url: https://releases.ansible.com/ansible-tower/setup-bundle/ansible-tower-setup-bundle-latest.el7.tar.gz
+
+  - name: アーカイブ展開
+    unarchive:
+      remove_src: yes
+      src: /root/ansible-tower-setup-bundle-latest.el7.tar.gz
+      dest: /root/
+
+  - name: 展開した場所へのsymlink作成
+    shell: ln -s /root/ansible-tower-setup*el7 /root/ansible-tower-setup
+
+  - name: ansible & ansible-tower パッケージを削除
+    yum:
+      name: ansible, ansible-tower
+      state: removed
+
+  - name: 旧ファイルの削除
+    command: /usr/bin/rm -rf /var/lib/awx
+
+  - name: httpdの停止&無効化
+    service:
+      name: httpd
+      state: stopped
+      enabled: no
+
+  - name: admin_password設定(=>"password"です..)
+    lineinfile:
+      path: /root/ansible-tower-setup/inventory
+      regexp: '^admin_password='
+      line: 'admin_password=\'{{ tower_passwords }}\''
+
+  - name: pg_password設定(=>"password"です..)
+    lineinfile:
+      path: /root/ansible-tower-setup/inventory
+      regexp: '^pg_password='
+      line: 'pg_password=\'{{ tower_passwords }}\''
+
+  - name: rabbitmq_password設定(=>"password"です..)
+    lineinfile:
+      path: /root/ansible-tower-setup/inventory
+      regexp: '^rabbitmq_password='
+      line: 'rabbitmq_password=\'{{ tower_passwords }}\''
+      
+      
+  
+    
+    

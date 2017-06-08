@@ -6,3 +6,6 @@ cf.example.com
 
 [tower]
 ansible1.example.com
+
+[tower:vars]
+tower_passwords='password'
