@@ -56,7 +56,15 @@
       path: /root/ansible-tower-setup/inventory
       regexp: '^rabbitmq_password='
       line: rabbitmq_password='{{ tower_passwords }}'
-    
-  
-    
+
+  - name: setupスクリプト実行
+    command: /root/ansible-tower-setup/setup.sh
+    args:
+      chdir: /root/ansible-tower-setup
+    register: result
+
+  - name: setup.sh結果
+    debug:
+      msg: "{{ result }}"
+   
     
