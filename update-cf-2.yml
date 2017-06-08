@@ -61,10 +61,11 @@
 
   - name: postgresqlサービスをenable & start
     service:
+      name: rh-postgresql95-postgresql
       state: started
       enabled: yes
 
-  - name: evmserverdを開始
+  - name: evmserverdを開始(数分お待ちください)
     service:
       name: evmserverd
       state: started
