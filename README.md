@@ -26,7 +26,7 @@ ansible-playbook -i workstation-${GUID}.rhpds.opentlc.com, prov-workstation.yml
 6. 必要なパッケージを入れます
 7. playbook他をダウンロードします
 ```
-ssh yourname-redhat.com@workstation-${GUID}.rhpds.opentlc.com
+ssh -i /your/identity/file yourname-redhat.com@workstation-${GUID}.rhpds.opentlc.com
 sudo -i
 rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 yum install -y git expect ansible
