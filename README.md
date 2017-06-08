@@ -10,7 +10,13 @@ see. http://www.opentlc.com/ssh.html
 
 ### ローカルでAnsibleが使える人：
 
-3. workstation-${GUID}.rhpds.opentlc.com へidentityファイル指定せずにsshできるよう設定しておいて下さい
+3. workstation-${GUID}.rhpds.opentlc.com へidentityファイル指定せずにsshできるよう設定しておいて下さい。以下は ~/.ssh/configの例
+```
+Host workstation-*.rhpds.opentlc.com
+  IdentityFile ~/.ssh/id_rsa_nopass
+  User myname-redhat.com
+```
+
 4. 適当な場所へplaybookをダウンロードして、実行
 ```
 cd /tmp
@@ -64,3 +70,9 @@ ansible-playbook -i inventory update-cf-2.yml
 パスワードは従来通り変更ありません。
 
 以上
+
+## 忘備録(その他やるべき事)
+
+以下は手作業ですが、やっとかないとハマるので書いておきます::
+
+1. CloudFormsで、ロールを追加しておく
