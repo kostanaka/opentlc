@@ -8,34 +8,36 @@
   tasks:
 
   - name: vmdbのmigration(その1)
-    shell: bash -l /var/www/miq/vmdb/bin/rake db:migrate
+    shell: bash -lc "/var/www/miq/vmdb/bin/rake db:migrate"
     args:
       chdir: /var/www/miq/vmdb
-    register: migration1
+    register: migration1_result
 
-  - debug:
-      msg: "{{ migration1 }}"
+  - name: (実行結果)
+    debug:
+      msg: "{{ migration1_result }}"
 
   - name: vmdbのmigration(その2)
-    shell: bash -l /var/www/miq/vmdb/bin/rake evm:automate:reset
+    shell: bash -lc "/var/www/miq/vmdb/bin/rake evm:automate:reset"
     args:
       chdir: /var/www/miq/vmdb
-    register: migration2
+    register: migration2_result
 
-  - debug:
-      msg: "{{ migration2 }}"
+  - name: (実行結果)
+    debug:
+      msg: "{{ migration2_result }}"
 
-      
-#  - name: postgresql upgradeスクリプト実行
-#    command: /root/opentlc/pg_upgrade.sh
+  - name: postgresql upgradeスクリプト実行
+    expect:
+      command: /usr/bin/bash -lc /usr/bin/miq_postgres_upgrade.sh
+      chdir: /root
+      responses:
+        "Are you sure you want to proceed? (Y/N): ": "Y"
+    register: upgrade_result
+          
+  - name: (実行結果)
+    debug:
+      msg: "{{ upgrade_result }}"
 
-#  - name: postgresql.confの設定変更
-    
 
 
-
-
-  - name: パッケージのアップデート(all)
-    yum:
-      name: '*'
-      state: latest
