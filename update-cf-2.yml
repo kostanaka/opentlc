@@ -28,11 +28,9 @@
       msg: "{{ migration2_result }}"
 
   - name: postgresql upgradeスクリプト実行
-    expect:
-      command: /usr/bin/bash -lc /usr/bin/miq_postgres_upgrade.sh
+    command: /usr/bin/bash -lc "/usr/bin/miq_postgres_upgrade.sh < (sleep 5; echo Y)"
+    args:
       chdir: /root
-      responses:
-        "Are you sure you want to proceed? (Y/N): ": "Y"
     register: upgrade_result
           
   - name: (実行結果)
