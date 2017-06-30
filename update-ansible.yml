@@ -40,8 +40,8 @@
   - name: password設定(=>inventoryファイルを見て下さい)
     lineinfile:
       path: /root/ansible-tower-setup/inventory
-      regexp: "{{ items.regexp }}"
-      line: "{{ items.line }}"
+      regexp: "{{ item.regexp }}"
+      line: "{{ item.line }}"
     with_items:
     - regexp: '^admin_password='
       line: admin_password='{{ tower_passwords }}'
