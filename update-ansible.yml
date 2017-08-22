@@ -37,6 +37,12 @@
       state: stopped
       enabled: no
 
+  - name: 旧DB(aws)の削除
+    postgresql_db:
+      name: awx
+      owner: awx
+      state: absent
+
   - name: password設定(=>inventoryファイルを見て下さい)
     lineinfile:
       path: /root/ansible-tower-setup/inventory
