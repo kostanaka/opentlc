@@ -21,6 +21,10 @@
   - name: 展開した場所へのsymlink作成
     shell: ln -sf /root/ansible-tower-setup*el7 /root/ansible-tower-setup
 
+  - name: Ansible Tower関連サービスの停止
+    command: ansible-tower-service stop
+    ignore_errors: yes
+
   - name: ansible & ansible-tower パッケージを削除
     yum:
       name: ansible, ansible-tower
@@ -31,17 +35,11 @@
       path: /var/lib/awx
       state: absent
 
-  - name: httpdの停止&無効化
-    service:
-      name: httpd
-      state: stopped
-      enabled: no
-
-  - name: 旧DB(aws)の削除
-    postgresql_db:
-      name: awx
-      owner: awx
-      state: absent
+#  - name: httpdの停止&無効化
+#   service:
+#      name: httpd
+#      state: stopped
+#      enabled: no
 
   - name: password設定(=>inventoryファイルを見て下さい)
     lineinfile:
